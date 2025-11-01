@@ -43,7 +43,6 @@ def generate_quote_image(author_text, author_name, author_avatar_url, background
         white_color_list = ['#ffffff', '#f5f5f5', '#fffafa', 'white', 'gray']
         color_text = 'black' if color in white_color_list else 'white'
 
-        # Текст переносим построчно
         text_lines = []
         for line in author_text.split('\n'):
             wrapped = textwrap.wrap(line, width=45)
@@ -53,7 +52,6 @@ def generate_quote_image(author_text, author_name, author_avatar_url, background
         height = int(text_height) + 460
         width = 1050
 
-        # Фон
         if background_image:
             background = Image.open(io.BytesIO(background_image)).resize((width, height))
             enhancer = ImageEnhance.Brightness(background)
@@ -78,7 +76,6 @@ def generate_quote_image(author_text, author_name, author_avatar_url, background
         for i, line in enumerate(text_lines):
             draw.text((50, 150 + i * font.size), line, fill=color_text, font=font)
 
-        # Аватар с маской
         response = requests.get(author_avatar_url, timeout=5)
         response.raise_for_status()
         avatar = Image.open(io.BytesIO(response.content)).resize((170, 170)).convert("RGBA")
@@ -89,10 +86,8 @@ def generate_quote_image(author_text, author_name, author_avatar_url, background
 
         image.paste(avatar, (50, height - 230), mask)
 
-        # Автор
         draw.text((260, height - 170), author_name, fill=color_text, font=font)
 
-        # Экспорт
         with io.BytesIO() as output:
             image.save(output, format="PNG")
             output.seek(0)
@@ -173,7 +168,6 @@ async def handle_quote_request(message: Message):
         if len(message_parts) == 2:
             color = message_parts[1]
 
-    # Автор
     user_info = await bot.api.users.get(user_ids=original_message.from_id, fields='photo_200')
     if user_info:
         author_name = f'{user_info[0].first_name} {user_info[0].last_name}'
@@ -193,7 +187,6 @@ async def handle_quote_request(message: Message):
         await message.answer('Сообщение должно содержать текст и не состоять полностью из emoji.')
         return
 
-    # Фон
     background_image = None
     if message.attachments:
         for attachment in message.attachments:
