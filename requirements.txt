@@ -3,7 +3,7 @@ vkbottle==4.8.1
 aiohttp>=3.9,<4
 aiofiles>=24,<25
 
-pillow==11.0.0
+pillow
 
 pymorphy3==2.0.2
 pymorphy3-dicts-ru==2.4.417150.4580142
