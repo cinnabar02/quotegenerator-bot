@@ -1,5 +1,4 @@
 vkbottle==4.4.2
-vkbottle-types==5.199.63.2
 
 pillow
 
