@@ -1,19 +1,18 @@
-vkbottle==4.4.2
+vkbottle==4.8.1
 
-pillow
+aiohttp>=3.9,<4
+aiofiles>=24,<25
+
+pillow==11.0.0
 
 pymorphy3==2.0.2
 pymorphy3-dicts-ru==2.4.417150.4580142
 
 python-dotenv==1.2.1
 
-aiohttp>=3.9,<4
-aiofiles>=24,<25
-
 requests==2.32.3
 
 DAWG-Python>=0.7,<1
-
 attrs>=24,<25
 yarl>=1.15,<2
 multidict>=6,<7
